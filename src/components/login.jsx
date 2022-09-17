@@ -1,54 +1,53 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./login.css"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Formik } from 'formik';
+import TextField from '@mui/material/TextField';
+
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("")
+  const [valid, setValid] = useState(true);
 
 
 
-    let history = useNavigate();
-const [popupStyle, showPopup] = useState("hide")
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("")
 
-const popup = () => {
-    showPopup("login-popup")
-    setTimeout(() => showPopup("hide"), 3000)
-}
+  let history = useNavigate();
 
-const loginAPI =()=>{
+
+  // const validatePasswordHandler = () => {
+  //     if(password == ""){
+  //       setPasswordIsValid(false)
+  //     }
+  // };
+
+  const loginAPI = (values) => {
+    console.log('values', values)
     axios.post("http://work.8848digitalerp.com/api/method/login", {
-            "usr": "test@gmail.com",
-            "pwd": "Ascra@123"
+      "usr": email,
+      "pwd": password
     }).then(function (response) {
-        console.log('response', response)
+      history(response.data.home_page)
     }).catch(function (error) {
-        console.log(error);
-      });
-}
+      setValid(false)
+    });
+  }
 
-console.log('email', email)
 
-const onSuccess = e => {
-    history("/")
-}
+  return (
+    <div>
+      <input type="text" value={email} onChange={(event) => setEmail(event.target.value)}
+        placeholder="username" />
+      <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="password"  />
+       {!valid ? <p className="text-danger">Email or Password must be wrong</p> : null}
+      <button onClick={loginAPI}>submit</button>
+    </div>
 
-const onFailure = e => {
-    alert("User sign in Failed")
-    console.log(e)
-}
-  return <div className="page">
-           <div className="cover">
-            <h1>Login</h1>
-            <input type="text" value={email} onChange={setEmail((e)=> e.target.value)} placeholder="username" />
-            <input type="password" value={password} onChange={setPassword((e)=> e.target.value)} placeholder="password" />
+  )
 
-            <div className="login-btn" onClick={loginAPI}>Login</div>
-            
-        </div>
-  </div>;
 };
 
 export default Login;
