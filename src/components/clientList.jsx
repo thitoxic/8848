@@ -8,61 +8,73 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Register from './register';
 
 const ClientList = () => {
-
-  const token = "86ecc77628c9544:bb3daa49eab307e"
   const [clients, setClients] = useState([])
+  const [formdata, setFormData] = useState([])
   useEffect(() => {
     getClients()
-  
-  })
-  
+
+  }, [])
+
+  const getName = (name) => {
+    axios.put(`http://work.8848digitalerp.com/api/resource/Client/${name}`,{
+      "gender": "Male"
+  }, {
+    headers: {
+      Authorization: 'token 86ecc77628c9544:bb3daa49eab307e' //the token is a variable which holds the token
+    }
+  }).then((resp) => {
+        setFormData(resp.data.data)
+      }).catch((err) => {
+        console.log('err', err)
+      })
+    }
   
 
-  const getClients =()=> {
-    fetch("http://work.8848digitalerp.com/api/resource/Client/",{
+
+
+  const getClients = () => {
+    axios.get("http://work.8848digitalerp.com/api/resource/Client/", {
       headers: {
         Authorization: 'token 86ecc77628c9544:bb3daa49eab307e' //the token is a variable which holds the token
-    }
-    }).then((resp)=> {
-      console.log('err', resp)
+      }
+    }).then((resp) => {
+      setClients(resp.data.data)
+    }).catch((err) => {
+      console.log('err', err)
     })
   }
- return (
-  <TableContainer component={Paper}>
-  <Table sx={{ minWidth: 650 }} aria-label="simple table">
-    <TableHead>
-      <TableRow>
-        <TableCell>Book Name</TableCell>
-        <TableCell align="right">Book Author</TableCell>
-        <TableCell align="right">Book ISB Number</TableCell>
-        <TableCell align="right">Settings</TableCell>
-       
-      </TableRow>
-    </TableHead>
-    {/* <TableBody>
-      {books.map((book) => (
-        <TableRow
-          key={book.bookId}
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        >
-          <TableCell component="th" scope="row"> {book.bookTitle}</TableCell>
-          <TableCell align="right">{book.bookAuthor}</TableCell>
-          <TableCell align="right">{book.bookIsbn}</TableCell>
-          <TableCell align="right"
-          settingsField 
-          removeBook={()=>removeBook(book.bookId)} 
-          editBook={()=>editBook(book)}/>
+  return (
+    <>
+    <TableContainer className='my-5' component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Client Name</TableCell>
+            <TableCell align="right">View Client</TableCell>
 
-            <button>delete</button>
-            <button>edit</button>
-        </TableRow>
-      ))}
-    </TableBody> */}
-  </Table>
-</TableContainer>
- )
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {clients.map((client) => (
+            <TableRow
+              key={client.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row"> {client.name}</TableCell>
+              <TableCell align="right" component="th" scope="row"><button onClick={() => getName(client.name)}>view client</button></TableCell>
+
+            </TableRow>
+
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    <Register formdata={formdata}/>
+    </>
+  )
 }
 
 export default ClientList
