@@ -56,7 +56,10 @@ const ClientList = () => {
   }
   return (
     <>
+    <div className='d-flex justify-content-end'>
     <button onClick={logout} className='button-6 '>logout</button>
+
+    </div>
     <TableContainer className='my-3' component={Paper}>
       <Table sx={{ minWidth: 450 }} aria-label="simple table">
         <TableHead>
