@@ -56,6 +56,7 @@ const Register = ({ formdata, name }) => {
       </Grid>
       <Grid className="d-flex justify-content-center"  container spacing={2}>
       <input
+      type="number"
         className="form-input"
         defaultValue={formdata.mobile_no}
         placeholder="Mobile"
