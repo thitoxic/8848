@@ -14,7 +14,7 @@ const Register = ({ formdata, name }) => {
     axios
       .put(
         `http://work.8848digitalerp.com/api/resource/Client/${name}`,
-          updateform.Object,
+          updateform,
         {
           headers: {
             Authorization: "token 86ecc77628c9544:bb3daa49eab307e", //the token is a variable which holds the token
