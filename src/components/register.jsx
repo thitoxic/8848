@@ -60,7 +60,7 @@ const Register = ({ formdata, name }) => {
         className="form-input"
         defaultValue={formdata.mobile_no}
         placeholder="Mobile"
-        name="name"
+        name="mobile_no"
         onChange={(e) => {
           setUpdateForm((prev)=> { return {...prev, [e.target.name]: e.target.value }})
 
