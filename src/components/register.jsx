@@ -114,7 +114,7 @@ const Register = ({ formdata, name }) => {
 <Grid className="d-flex justify-content-center"  container spacing={2}>
 <select
         className="form-input"
-        name="bank "
+        name="bank"
         id="bank"
         value={formdata.bank}
         onChange={(e) => {
@@ -131,7 +131,7 @@ const Register = ({ formdata, name }) => {
       </select>
       <select
         className="form-input"
-        name="customer_type"
+        name="type"
         id="customer_type"
         value={formdata.type}
         onChange={(e) => {
