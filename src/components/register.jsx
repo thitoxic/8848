@@ -14,9 +14,7 @@ const Register = ({ formdata, name }) => {
     axios
       .put(
         `http://work.8848digitalerp.com/api/resource/Client/${name}`,
-        {
-          updateform,
-        },
+          updateform.Object,
         {
           headers: {
             Authorization: "token 86ecc77628c9544:bb3daa49eab307e", //the token is a variable which holds the token
@@ -41,7 +39,8 @@ const Register = ({ formdata, name }) => {
           name="name"
           placeholder="Name"
           onChange={(e) => {
-            setUpdateForm(...updateform, { [e.target.name]: e.target.value });
+          setUpdateForm((prev)=> { return {...prev, [e.target.name]: e.target.value }})
+
           }}
         ></input>
         <input
@@ -50,7 +49,8 @@ const Register = ({ formdata, name }) => {
           name="address"
           placeholder="Address"
           onChange={(e) => {
-            setUpdateForm(...updateform, { [e.target.name]: e.target.value });
+          setUpdateForm((prev)=> { return {...prev, [e.target.name]: e.target.value }})
+
           }}
         ></input>
       </Grid>
@@ -59,8 +59,10 @@ const Register = ({ formdata, name }) => {
         className="form-input"
         defaultValue={formdata.mobile_no}
         placeholder="Mobile"
+        name="name"
         onChange={(e) => {
-          setUpdateForm(...updateform, { [e.target.name]: e.target.value });
+          setUpdateForm((prev)=> { return {...prev, [e.target.name]: e.target.value }})
+
         }}
       ></input>
 
@@ -68,15 +70,12 @@ const Register = ({ formdata, name }) => {
         className="form-input"
         defaultValue={formdata.email}
         placeholder="Email"
+        name="email"
         onChange={(e) => {
-          setUpdateForm(...updateform, { [e.target.name]: e.target.value });
+          setUpdateForm((prev)=> { return {...prev, [e.target.name]: e.target.value }})
         }}
       ></input>
       </Grid>
-      {/* <button onClick={setNewData({
-              ...formdata, 
-              
-            })}></button> */}
 <Grid className="d-flex justify-content-center" container spacing={2}>
 <select
         className="form-input"
@@ -84,7 +83,7 @@ const Register = ({ formdata, name }) => {
         id="represents_company"
         value={formdata.represents_company}
         onChange={(e) => {
-          setUpdateForm(...updateform, { [e.target.name]: e.target.value });
+          setUpdateForm((prev)=> { return {...prev, [e.target.name]: e.target.value }})
         }}
       >
         <option selected>Company</option>
@@ -101,7 +100,7 @@ const Register = ({ formdata, name }) => {
         id="gender"
         value={formdata.gender}
         onChange={(e) => {
-          setUpdateForm(...updateform, { [e.target.name]: e.target.value });
+          setUpdateForm((prev)=> { return {...prev, [e.target.name]: e.target.value }})
         }}
       >
         <option selected>Gender</option>
@@ -118,7 +117,7 @@ const Register = ({ formdata, name }) => {
         id="bank"
         value={formdata.bank}
         onChange={(e) => {
-          setUpdateForm(...updateform, { [e.target.name]: e.target.value });
+          setUpdateForm((prev)=> { return {...prev, [e.target.name]: e.target.value }})
         }}
       >
         <option selected>Bank</option>
@@ -135,7 +134,7 @@ const Register = ({ formdata, name }) => {
         id="customer_type"
         value={formdata.type}
         onChange={(e) => {
-          setUpdateForm(...updateform, { [e.target.name]: e.target.value });
+          setUpdateForm((prev)=> { return {...prev, [e.target.name]: e.target.value }})
         }}
       >
         <option selected>Customer Type</option>
@@ -151,7 +150,7 @@ const Register = ({ formdata, name }) => {
         id="territory"
         value={formdata.territory}
         onChange={(e) => {
-          setUpdateForm(...updateform, { [e.target.name]: e.target.value });
+          setUpdateForm((prev)=> { return {...prev, [e.target.name]: e.target.value }})
         }}
       >
         <option selected>Terretory</option>
