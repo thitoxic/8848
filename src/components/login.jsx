@@ -38,12 +38,13 @@ const Login = () => {
 
 
   return (
-    <div>
-      <input type="text" value={email} onChange={(event) => setEmail(event.target.value)}
+    <div className="d-flex justify-content-center flex-column align-items-center m-4 login-container">
+      <h4>Login</h4>
+      <input className="form-input my-4" type="text" value={email} onChange={(event) => setEmail(event.target.value)}
         placeholder="username" />
-      <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="password"  />
+      <input className="form-input my-4" type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="password"  />
        {!valid ? <p className="text-danger">Email or Password must be wrong</p> : null}
-      <button onClick={loginAPI}>submit</button>
+      <button className="button-6 my-3" onClick={loginAPI}>submit</button>
     </div>
 
   )

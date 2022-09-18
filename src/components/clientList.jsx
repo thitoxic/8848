@@ -9,18 +9,24 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Register from './register';
+import "./clientList.css"
+import { useNavigate } from "react-router-dom";
+
 
 const ClientList = () => {
   const [clients, setClients] = useState([])
   const [formdata, setFormData] = useState([])
+
+  let navigate = useNavigate()
   useEffect(() => {
     getClients()
 
   }, [])
-
+  const [name,setName] = useState("")
+  
   const getName = (name) => {
     axios.put(`http://work.8848digitalerp.com/api/resource/Client/${name}`,{
-      "gender": "Male"
+    formdata
   }, {
     headers: {
       Authorization: 'token 86ecc77628c9544:bb3daa49eab307e' //the token is a variable which holds the token
@@ -31,8 +37,6 @@ const ClientList = () => {
         console.log('err', err)
       })
     }
-  
-
 
 
   const getClients = () => {
@@ -46,14 +50,19 @@ const ClientList = () => {
       console.log('err', err)
     })
   }
+
+  const logout=()=>{
+    navigate("/login")
+  }
   return (
     <>
-    <TableContainer className='my-5' component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <button onClick={logout} className='button-6 '>logout</button>
+    <TableContainer className='my-3' component={Paper}>
+      <Table sx={{ minWidth: 450 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Client Name</TableCell>
-            <TableCell align="right">View Client</TableCell>
+            <TableCell className='thead'>Client Name</TableCell>
+            <TableCell className='thead' align="right">Client Info</TableCell>
 
           </TableRow>
         </TableHead>
@@ -64,7 +73,7 @@ const ClientList = () => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row"> {client.name}</TableCell>
-              <TableCell align="right" component="th" scope="row"><button onClick={() => getName(client.name)}>view client</button></TableCell>
+              <TableCell align="right" component="th" scope="row"><button className='button-6' onClick={() => getName(client.name)}>view client</button></TableCell>
 
             </TableRow>
 
@@ -72,7 +81,7 @@ const ClientList = () => {
         </TableBody>
       </Table>
     </TableContainer>
-    <Register formdata={formdata}/>
+    <Register formdata={formdata} name={name}/>
     </>
   )
 }

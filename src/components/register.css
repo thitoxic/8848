@@ -1,0 +1,16 @@
+.client-form {
+    height: 60vh;
+}
+
+.form-input {
+    display: block;
+    width: 40%;
+    padding: 8px 16px;
+    margin: 6px;
+    line-height: 25px;
+    font-family: inherit;
+    border-radius: 6px;
+    color: rgba(0, 0, 255, 0.479);
+    border: 1px solid rgba(0, 0, 255, 0.18);
+    transition: border .3s ease;
+}
