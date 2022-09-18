@@ -52,7 +52,7 @@ const ClientList = () => {
   }
 
   const logout=()=>{
-    navigate("/login")
+    navigate("/")
   }
   return (
     <>
